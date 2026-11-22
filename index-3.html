@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0f12">
+  <meta name="description" content="NEXO Enhance: mejora imágenes con Real-ESRGAN y ajusta videos desde el celular.">
+  <title>NEXO Enhance — Clarity Studio</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090e11;--panel:#111a1e;--panel2:#152126;--line:#26383c;--text:#eef6f4;--muted:#95a9a5;--mint:#8de4cf;--mint2:#b9f2d8;--warn:#f4c98b;--red:#ffaaa2;--r:22px;--shadow:0 18px 54px #0007}
+    *{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% -10%,#173c3540,transparent 48%),radial-gradient(ellipse at 0% 28%,#24434b2a,transparent 42%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:-.018em}button,input{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{opacity:.42;cursor:not-allowed}.wrap{width:min(920px,calc(100% - 28px));margin:auto;padding:18px 0 42px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:4px 2px 26px}.brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:900;letter-spacing:.17em}.brand-icon{width:36px;height:36px;border:1px solid #8de4cf88;border-radius:12px;display:grid;place-items:center;color:var(--mint);background:linear-gradient(145deg,#8de4cf24,#8de4cf05)}.brand-icon svg{width:21px}.brand small{display:block;font-size:8px;color:var(--muted);letter-spacing:.2em;margin-top:2px}.status{border:1px solid #8de4cf44;background:#8de4cf0d;color:var(--mint);border-radius:50px;padding:7px 10px;font-size:10px;font-weight:800;letter-spacing:.08em}.hero{padding:3px 2px 22px}.eyebrow{color:var(--mint);font-weight:850;font-size:10px;letter-spacing:.2em;text-transform:uppercase}.hero h1{font-size:clamp(38px,8vw,62px);line-height:.98;letter-spacing:-.07em;margin:12px 0 12px}.hero h1 em{font-style:normal;color:var(--mint)}.hero p{max-width:570px;color:var(--muted);font-size:13px;line-height:1.7;margin:0}.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.72fr);gap:14px;align-items:start}.card{background:linear-gradient(155deg,#142027f5,#0f171cf7);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);min-width:0}.stage-card{padding:15px}.settings-card{padding:18px;position:sticky;top:12px}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:4px;background:#091014;border:1px solid var(--line);border-radius:14px;margin-bottom:13px}.tab{border:0;border-radius:10px;padding:12px 9px;background:transparent;color:var(--muted);font-size:12px;font-weight:800}.tab.active{background:#22353a;color:var(--mint);box-shadow:inset 0 0 0 1px #8de4cf33}.upload{min-height:238px;border:1px dashed #496167;border-radius:17px;background:radial-gradient(ellipse at 50% 0%,#8de4cf12,transparent 65%),#0a1115;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px 15px;transition:.2s}.upload.drag{border-color:var(--mint);background:#8de4cf12}.upload-symbol{width:54px;height:54px;border:1px solid #8de4cf55;border-radius:17px;color:var(--mint);display:grid;place-items:center;background:#8de4cf0d;margin-bottom:14px}.upload-symbol svg{width:25px}.upload h2{font-size:17px;margin:0 0 7px}.upload p{font-size:12px;line-height:1.6;color:var(--muted);max-width:300px;margin:0 0 16px}.types{font-size:9px;color:#728682;letter-spacing:.16em;margin-top:11px}.btn{min-height:43px;padding:11px 15px;border:1px solid transparent;border-radius:12px;font-size:12px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;text-align:center;transition:filter .15s,transform .15s}.btn:active{transform:scale(.985)}.primary{background:var(--mint);color:#071311;box-shadow:0 7px 22px #8de4cf22}.secondary{background:#1b2c32;border-color:#354d53;color:var(--text)}.ghost{background:transparent;border-color:var(--line);color:var(--muted)}.full{width:100%}.hidden{display:none!important}.preview{display:none}.filebar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 1px 12px}.file-details{display:flex;align-items:center;gap:9px;min-width:0}.file-symbol{width:34px;height:34px;flex:0 0 auto;border-radius:11px;background:#8de4cf13;color:var(--mint);display:grid;place-items:center}.file-symbol svg{width:17px}.file-name{font-size:11px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:230px}.file-sub{font-size:9px;color:var(--muted);margin-top:3px}.preview-frame{width:100%;min-height:210px;max-height:480px;aspect-ratio:16/10;background:#070b0e;border:1px solid #26353b;border-radius:15px;overflow:hidden;display:grid;place-items:center;position:relative}.compare{position:relative;width:100%;height:100%;min-height:210px;max-height:480px;overflow:hidden}.compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.after-layer{position:absolute;inset:0;overflow:hidden;clip-path:inset(0 50% 0 0)}.compare-line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--mint);box-shadow:0 0 12px #8de4cf}.compare-knob{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;display:grid;place-items:center;border-radius:50%;border:2px solid var(--mint);background:#0b1518;color:var(--mint);pointer-events:none}.compare-knob svg{width:16px}.compare-label{position:absolute;top:10px;padding:6px 8px;border-radius:6px;background:#050a0dcc;border:1px solid #ffffff18;font-size:8px;font-weight:900;letter-spacing:.14em;pointer-events:none}.compare-label.before{left:10px}.compare-label.after{right:10px}.compare-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize}.video-canvas{display:block;width:100%;max-height:480px;object-fit:contain;background:#05090b}.preview-tools{display:flex;align-items:center;gap:9px;margin-top:10px}.preview-tools .btn{min-height:36px;padding:8px 11px}.seek{flex:1;min-width:50px;accent-color:var(--mint)}.time{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}.note{font-size:10px;line-height:1.55;color:var(--muted);margin:10px 2px 0}.progress{display:none;margin-top:15px}.progress-head{display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px;margin-bottom:7px}.track{height:6px;background:#27373c;border-radius:20px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--mint),var(--mint2));transition:width .15s}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.panel-head h3{font-size:14px;margin:0}.step{font-size:9px;color:var(--mint);font-weight:900;letter-spacing:.12em}.section{padding:14px 0;border-top:1px solid var(--line)}.section:first-of-type{border-top:0;padding-top:0}.section-title{font-size:10px;font-weight:900;color:#dce8e4;letter-spacing:.13em;text-transform:uppercase;margin-bottom:9px}.choice{border:1px solid #8de4cf44;background:#8de4cf0d;border-radius:12px;padding:12px}.choice strong{display:block;font-size:12px}.choice span{display:block;color:var(--muted);font-size:10px;line-height:1.5;margin-top:4px}.segmented{display:flex;gap:5px;padding:4px;background:#091014;border:1px solid var(--line);border-radius:12px}.segmented button{flex:1;border:0;background:transparent;color:var(--muted);border-radius:8px;padding:9px 7px;font-size:10px;font-weight:800}.segmented button.active{background:#21343a;color:var(--mint)}.hint{font-size:10px;color:var(--muted);line-height:1.6;margin-top:9px}.range-label{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#c8d7d2;margin:11px 0 5px}.range-label output{color:var(--mint);font-variant-numeric:tabular-nums}input[type=range]:not(.seek){width:100%;accent-color:var(--mint)}.actions{display:grid;gap:8px;margin-top:15px}.info{display:none;margin-top:12px;border:1px solid #8de4cf33;background:#8de4cf0b;border-radius:12px;padding:12px;font-size:10px;line-height:1.6;color:#c3d4ce;overflow-wrap:anywhere}.info.error{border-color:#ffaaa255;background:#ffaaa20b;color:#ffd0cb}.warning{font-size:10px;line-height:1.6;color:#d8bd91;background:#f4c98b0a;border:1px solid #f4c98b2c;padding:11px;border-radius:12px;margin-top:13px}.trust{font-size:10px;line-height:1.6;color:#9eb2ac;background:#8de4cf08;border:1px solid #8de4cf23;border-radius:12px;padding:11px;margin-top:13px}.download-row{display:grid;gap:7px;margin-top:10px}.download-link{width:100%;background:var(--mint);color:#071311}.below{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:14px}.mini{border:1px solid var(--line);background:#111a1eaa;border-radius:16px;padding:15px}.mini b{display:block;font-size:11px;margin:10px 0 5px}.mini p{font-size:10px;line-height:1.55;color:var(--muted);margin:0}.mini-icon{width:31px;height:31px;border-radius:10px;background:#8de4cf12;color:var(--mint);display:grid;place-items:center}.mini-icon svg{width:17px}footer{padding:23px 3px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:#667973;font-size:9px;letter-spacing:.04em}.toast{position:fixed;z-index:20;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#e7f6ef;color:#071311;border-radius:12px;padding:11px 15px;max-width:calc(100% - 28px);font-size:12px;font-weight:800;box-shadow:0 8px 32px #0008;transition:.22s}.toast.show{opacity:1;transform:translate(-50%,0)}.source-video{position:fixed;left:-5px;top:-5px;width:2px;height:2px;opacity:.001;pointer-events:none}
+    @media(max-width:760px){.wrap{width:min(620px,calc(100% - 22px));padding-top:13px}.workspace{grid-template-columns:1fr}.settings-card{position:static}.hero{padding-bottom:17px}.hero h1{font-size:clamp(38px,11vw,52px)}.stage-card{padding:11px}.settings-card{padding:15px}.below{grid-template-columns:1fr 1fr}.mini:last-child{grid-column:1/-1}.preview-frame{aspect-ratio:4/3;min-height:190px}.compare{min-height:190px}.compare img{max-height:100%}footer{font-size:8px}}
+    @media(max-width:390px){.file-name{max-width:145px}.below{grid-template-columns:1fr}.mini:last-child{grid-column:auto}.btn{font-size:11px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16.5 9 11l3.2 3.2L20 6.5M14.5 6.5H20V12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4v16h16" stroke="currentColor" stroke-width="1.4"/></svg></div><div>NEXO<small>ENHANCE · CLARITY STUDIO</small></div></div>
+    <div class="status" id="topStatus">LISTO PARA USAR</div>
+  </header>
+  <section class="hero"><div class="eyebrow">Image & video lab</div><h1>Más claridad.<br><em>Menos límites.</em></h1><p>Mejorá tus imágenes con reconstrucción neuronal y ajustá tus videos desde el celular. Subí un archivo, compará y guardá el resultado.</p></section>
+
+  <main class="workspace">
+    <section class="card stage-card" aria-label="Área de trabajo">
+      <div class="tabs" role="tablist" aria-label="Tipo de archivo">
+        <button class="tab active" id="tabImage" role="tab" aria-selected="true" type="button">▧ &nbsp; IMAGEN</button>
+        <button class="tab" id="tabVideo" role="tab" aria-selected="false" type="button">▷ &nbsp; VIDEO</button>
+      </div>
+      <div class="upload" id="uploadArea">
+        <div class="upload-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5V20h16v-4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 id="uploadTitle">Elegí una imagen</h2>
+        <p id="uploadText">Subí una foto, captura o ilustración. Real-ESRGAN puede reconstruir detalles y ampliarla hasta 4×.</p>
+        <button class="btn primary" id="chooseFile" type="button">Seleccionar archivo</button>
+        <div class="types" id="fileTypes">JPG · PNG · WEBP · AVIF</div>
+      </div>
+      <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp,image/avif" hidden>
+
+      <div class="preview" id="previewArea">
+        <div class="filebar">
+          <div class="file-details"><div class="file-symbol" id="fileSymbol">▧</div><div style="min-width:0"><div class="file-name" id="fileName">archivo.png</div><div class="file-sub" id="fileMeta">Preparando archivo…</div></div></div>
+          <button class="btn ghost" id="changeFile" type="button">Cambiar</button>
+        </div>
+        <div class="preview-frame" id="imageFrame">
+          <div class="compare" id="compareBox">
+            <img id="beforeImage" alt="Imagen original">
+            <div class="after-layer" id="afterLayer"><img id="afterImage" alt="Imagen mejorada"></div>
+            <div class="compare-line" id="compareLine"></div><div class="compare-knob" id="compareKnob"><svg viewBox="0 0 24 24" fill="none"><path d="m9 7-5 5 5 5m6-10 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <span class="compare-label before">ORIGINAL</span><span class="compare-label after">MEJORADO</span>
+            <input class="compare-range" id="compareRange" type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar original y mejorado">
+          </div>
+        </div>
+        <div class="preview-frame hidden" id="videoFrame"><canvas class="video-canvas" id="videoCanvas"></canvas></div>
+        <div class="preview-tools hidden" id="videoTools"><button class="btn ghost" id="playButton" type="button">▶</button><input class="seek" id="videoSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Posición del video"><span class="time" id="videoTime">00:00 / 00:00</span></div>
+        <p class="note" id="previewNote">Deslizá la línea para comparar el original y el resultado.</p>
+        <div class="progress" id="progressBox"><div class="progress-head"><span id="progressText">Preparando…</span><strong id="progressValue">0%</strong></div><div class="track"><div class="fill" id="progressFill"></div></div></div>
+      </div>
+    </section>
+
+    <aside class="card settings-card">
+      <div class="panel-head"><h3>Panel de mejora</h3><span class="step" id="panelStep">PASO 01 / 03</span></div>
+      <section id="imageSettings">
+        <div class="section"><div class="section-title">Motor de imagen</div><div class="choice"><strong>Real-ESRGAN x4plus</strong><span>Red neuronal de superresolución para fotografías, capturas y escenas reales. Modelo abierto y gratuito.</span></div><div class="hint">La primera carga descarga el modelo de IA (aprox. 64 MB). Se ejecuta en tu navegador; la imagen no se envía a un servidor.</div></div>
+        <div class="section"><div class="section-title">Tamaño de salida</div><div class="segmented" id="imageScale"><button type="button" class="active" data-scale="2">2× · Equilibrado</button><button type="button" data-scale="4">4× · Máximo</button></div><div class="hint">La red genera 4×; la opción 2× reduce el resultado después de la reconstrucción para ahorrar espacio.</div></div>
+        <div class="section"><div class="section-title">Límite seguro del celular</div><div class="hint">Para reducir cierres en Android, las imágenes muy grandes se adaptan antes de procesarse. El resultado conserva proporciones; no inventa detalles originales.</div></div>
+        <div class="actions"><button class="btn primary full" id="enhanceImage" type="button" disabled>✦ &nbsp; Mejorar con IA</button><button class="btn secondary full" id="quickImage" type="button" disabled>Mejora rápida sin IA</button><a class="btn download-link full hidden" id="downloadImage" href="#" download="nexo-imagen-mejorada.png">Descargar imagen mejorada</a></div>
+        <div class="trust">Privacidad: el procesamiento neuronal se hace en tu dispositivo. Necesitás internet para descargar el motor la primera vez. Sin cuenta, créditos ni pagos.</div>
+      </section>
+
+      <section id="videoSettings" class="hidden">
+        <div class="section"><div class="section-title">Perfil visual</div><div class="segmented" id="videoPreset"><button type="button" class="active" data-preset="natural">Natural</button><button type="button" data-preset="gaming">Gaming</button></div><div class="hint">Gaming aumenta el contraste y el color para capturas de juegos. Natural mantiene un aspecto más neutro.</div></div>
+        <div class="section"><div class="section-title">Ajustes</div>
+          <div class="range-label"><label for="videoContrast">Contraste</label><output id="videoContrastValue">108%</output></div><input id="videoContrast" type="range" min="85" max="135" value="108">
+          <div class="range-label"><label for="videoSaturation">Saturación</label><output id="videoSaturationValue">108%</output></div><input id="videoSaturation" type="range" min="70" max="140" value="108">
+          <div class="range-label"><label for="videoBrightness">Brillo</label><output id="videoBrightnessValue">100%</output></div><input id="videoBrightness" type="range" min="80" max="120" value="100">
+        </div>
+        <div class="actions"><button class="btn primary full" id="exportVideo" type="button" disabled>Procesar y exportar video</button><a class="btn download-link full hidden" id="downloadVideo" href="#" download="nexo-video-mejorado.webm">Descargar video mejorado</a></div>
+        <div class="warning">El modo video aplica ajustes visuales y reescala la vista si hace falta. No usa IA neuronal fotograma por fotograma. Se exporta en tiempo real y puede tardar lo mismo que dura el video.</div>
+        <div class="trust" id="videoAudioNote">Se intentará conservar el audio original si Chrome permite capturarlo.</div>
+      </section>
+      <div class="info" id="resultInfo" role="status" aria-live="polite"></div>
+    </aside>
+  </main>
+
+  <section class="below" aria-label="Características">
+    <article class="mini"><div class="mini-icon">✧</div><b>Reconstrucción neuronal</b><p>Real-ESRGAN 4× para imágenes; no es solamente un filtro de nitidez.</p></article>
+    <article class="mini"><div class="mini-icon">⇆</div><b>Comparación directa</b><p>Revisá el original y el resultado antes de guardarlo.</p></article>
+    <article class="mini"><div class="mini-icon">↓</div><b>Exportación móvil</b><p>Enlaces de descarga directos compatibles con Chrome Android.</p></article>
+  </section>
+  <footer><span>NEXO ENHANCE · CLARITY STUDIO · BUILD DEFINITIVO</span><span>Real-ESRGAN x4plus · ONNX Runtime Web · BSD-3-Clause</span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<video id="sourceVideo" class="source-video" playsinline preload="metadata"></video>
+
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const state = {
+    mode: 'image', file: null, originalURL: null, resultURL: null, videoURL: null,
+    imageScale: 2, imageSession: null, modelBuffer: null, backend: '',
+    videoDuration: 0, videoStream: null, recorder: null, chunks: [], exporting: false,
+    raf: 0, toastTimer: 0, previewImage: null
+  };
+  const ORT_VERSION = '1.30.0';
+  const ORT_SCRIPT = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/ort.all.min.js`;
+  const ORT_WASM = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/`;
+  const MODEL_URL = 'https://huggingface.co/skillsafe-ai/realesrgan-x4plus/resolve/107475e49b7d46412cc966481efccc3500955801/model.onnx';
+  const TILE = 96, MARGIN = 12, MAX_IMAGE_SIDE = 512, MAX_IMAGE_PIXELS = 180000;
+  const MAX_VIDEO_BYTES = 90 * 1024 * 1024, MAX_VIDEO_SECONDS = 60, MAX_VIDEO_PIXELS = 1280 * 720;
+  const video = $('sourceVideo'), canvas = $('videoCanvas');
+  const ctx = canvas.getContext('2d', { alpha: false });
+
+  function toast(message) {
+    const el = $('toast'); el.textContent = message; el.classList.add('show');
+    clearTimeout(state.toastTimer); state.toastTimer = setTimeout(() => el.classList.remove('show'), 3400);
+  }
+  function progress(percent, text) {
+    $('progressBox').style.display = 'block';
+    $('progressFill').style.width = Math.max(0, Math.min(100, percent)) + '%';
+    $('progressValue').textContent = Math.round(percent) + '%';
+    $('progressText').textContent = text;
+  }
+  function hideProgress() { $('progressBox').style.display = 'none'; $('progressFill').style.width = '0%'; }
+  function showInfo(message, error = false) {
+    const box = $('resultInfo'); box.textContent = message; box.style.display = 'block';
+    box.classList.toggle('error', error);
+  }
+  function fmtBytes(bytes) {
+    if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+  }
+  function fmtTime(seconds) {
+    if (!Number.isFinite(seconds)) return '00:00';
+    const s = Math.max(0, Math.floor(seconds));
+    return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  }
+  function safeName(name, suffix, ext) {
+    const base = (name || 'nexo-archivo').replace(/\.[^.]+$/, '').replace(/[^a-z0-9_-]+/gi, '-').replace(/^-+|-+$/g, '').slice(0, 48) || 'nexo-archivo';
+    return `${base}-${suffix}.${ext}`;
+  }
+  function revokeURL(key) {
+    if (state[key]) { URL.revokeObjectURL(state[key]); state[key] = null; }
+  }
+  function clearFile() {
+    cancelAnimationFrame(state.raf); state.exporting = false;
+    try { if (state.recorder && state.recorder.state === 'recording') state.recorder.stop(); } catch (_) {}
+    if (state.videoStream) { state.videoStream.getTracks().forEach(t => t.stop()); state.videoStream = null; }
+    revokeURL('originalURL'); revokeURL('resultURL'); revokeURL('videoURL');
+    try { video.pause(); video.removeAttribute('src'); video.load(); } catch (_) {}
+    state.file = null; state.previewImage = null; state.chunks = []; state.videoDuration = 0; $('topStatus').textContent = 'LISTO PARA USAR';
+    $('previewArea').style.display = 'none'; $('uploadArea').style.display = 'flex';
+    $('imageFrame').classList.remove('hidden'); $('videoFrame').classList.add('hidden'); $('videoTools').classList.add('hidden');
+    $('enhanceImage').disabled = true; $('quickImage').disabled = true; $('exportVideo').disabled = true;
+    $('downloadImage').classList.add('hidden'); $('downloadVideo').classList.add('hidden');
+    $('resultInfo').style.display = 'none'; $('resultInfo').classList.remove('error'); hideProgress();
+  }
+  function setMode(mode) {
+    if (state.exporting) { toast('Esperá a que termine el procesamiento antes de cambiar de modo.'); return; }
+    if (state.mode === mode) return;
+    clearFile(); state.mode = mode;
+    $('tabImage').classList.toggle('active', mode === 'image'); $('tabVideo').classList.toggle('active', mode === 'video');
+    $('tabImage').setAttribute('aria-selected', String(mode === 'image')); $('tabVideo').setAttribute('aria-selected', String(mode === 'video'));
+    $('imageSettings').classList.toggle('hidden', mode !== 'image'); $('videoSettings').classList.toggle('hidden', mode !== 'video');
+    $('fileInput').accept = mode === 'image' ? 'image/jpeg,image/png,image/webp,image/avif' : 'video/mp4,video/webm,video/quicktime,.mov,.m4v';
+    $('uploadTitle').textContent = mode === 'image' ? 'Elegí una imagen' : 'Elegí un video';
+    $('uploadText').textContent = mode === 'image' ? 'Subí una foto, captura o ilustración. Real-ESRGAN puede reconstruir detalles y ampliarla hasta 4×.' : 'Subí un video corto para ajustar contraste, color y brillo, y exportarlo.';
+    $('fileTypes').textContent = mode === 'image' ? 'JPG · PNG · WEBP · AVIF' : 'MP4 · WEBM · MOV · HASTA 60 S';
+    $('panelStep').textContent = mode === 'image' ? 'PASO 01 / 03' : 'VIDEO / 03';
+  }
+  $('tabImage').addEventListener('click', () => setMode('image'));
+  $('tabVideo').addEventListener('click', () => setMode('video'));
+  $('chooseFile').addEventListener('click', () => $('fileInput').click());
+  $('changeFile').addEventListener('click', () => $('fileInput').click());
+  $('fileInput').addEventListener('change', event => {
+    const file = event.target.files && event.target.files[0]; event.target.value = '';
+    if (file) loadFile(file);
+  });
+  ['dragenter', 'dragover'].forEach(type => $('uploadArea').addEventListener(type, event => { event.preventDefault(); $('uploadArea').classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach(type => $('uploadArea').addEventListener(type, event => { event.preventDefault(); $('uploadArea').classList.remove('drag'); }));
+  $('uploadArea').addEventListener('drop', event => { const file = event.dataTransfer && event.dataTransfer.files[0]; if (file) loadFile(file); });
+
+  function loadFile(file) {
+    if (state.exporting) { toast('Esperá a que termine el procesamiento antes de cambiar el archivo.'); return; }
+    if (state.mode === 'image' && !file.type.startsWith('image/')) { toast('En la pestaña Imagen elegí un archivo de imagen.'); return; }
+    if (state.mode === 'video' && !(file.type.startsWith('video/') || /\.(mp4|webm|mov|m4v)$/i.test(file.name))) { toast('Elegí un archivo de video MP4, WebM o MOV.'); return; }
+    if (state.mode === 'image' && file.size > 35 * 1024 * 1024) { toast('La imagen supera 35 MB. Probá con un archivo más liviano.'); return; }
+    if (state.mode === 'video' && file.size > MAX_VIDEO_BYTES) { toast('El video supera 90 MB. Elegí uno más liviano.'); return; }
+    clearFile(); state.file = file; state.originalURL = URL.createObjectURL(file);
+    $('uploadArea').style.display = 'none'; $('previewArea').style.display = 'block';
+    $('fileName').textContent = file.name; $('fileMeta').textContent = fmtBytes(file.size) + ' · cargando…';
+    if (state.mode === 'image') loadImage(file); else loadVideo(file);
+  }
+  function loadImage(file) {
+    const img = new Image(); state.previewImage = img;
+    img.onload = () => {
+      if (state.previewImage !== img) return;
+      $('beforeImage').src = state.originalURL; $('afterImage').src = state.originalURL;
+      $('fileMeta').textContent = `${img.naturalWidth} × ${img.naturalHeight} px · ${fmtBytes(file.size)}`;
+      $('imageFrame').classList.remove('hidden'); $('videoFrame').classList.add('hidden'); $('videoTools').classList.add('hidden');
+      updateCompare(50); $('compareRange').value = 50;
+      $('previewNote').textContent = 'Cuando termine la mejora, deslizá la línea para comparar.';
+      $('enhanceImage').disabled = false; $('quickImage').disabled = false; $('fileSymbol').textContent = '▧';
+      $('topStatus').textContent = 'IMAGEN CARGADA';
+    };
+    img.onerror = () => showInfo('Chrome no pudo abrir esta imagen. Probá guardarla como JPG o PNG.', true);
+    img.src = state.originalURL;
+  }
+  function loadVideo(file) {
+    $('imageFrame').classList.add('hidden'); $('videoFrame').classList.remove('hidden'); $('videoTools').classList.remove('hidden');
+    $('fileSymbol').textContent = '▷'; video.src = state.originalURL; video.load();
+    video.onloadedmetadata = () => {
+      const duration = video.duration;
+      if (!Number.isFinite(duration) || duration <= 0) { showInfo('No se pudo leer la duración del video.', true); return; }
+      if (duration > MAX_VIDEO_SECONDS) { clearFile(); toast('Para cuidar el celular, NEXO admite videos de hasta 60 segundos.'); return; }
+      state.videoDuration = duration;
+      $('fileMeta').textContent = `${video.videoWidth} × ${video.videoHeight} px · ${fmtTime(duration)} · ${fmtBytes(file.size)}`;
+      $('videoSeek').value = 0; $('videoSeek').max = duration; $('videoTime').textContent = `00:00 / ${fmtTime(duration)}`;
+      resizeVideoCanvas(); drawVideoFrame(); $('exportVideo').disabled = false;
+      $('previewNote').textContent = 'Reproducí el video para ver los ajustes. La exportación se genera a tiempo real.';
+      $('topStatus').textContent = 'VIDEO CARGADO';
+    };
+    video.onerror = () => showInfo('Chrome no puede reproducir este formato. Probá convertirlo a MP4 H.264.', true);
+  }
+  function updateCompare(value) {
+    $('afterLayer').style.clipPath = `inset(0 ${100 - value}% 0 0)`;
+    $('compareLine').style.left = value + '%'; $('compareKnob').style.left = value + '%';
+  }
+  $('compareRange').addEventListener('input', event => updateCompare(Number(event.target.value)));
+  $('imageScale').querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+    $('imageScale').querySelectorAll('button').forEach(b => b.classList.toggle('active', b === button)); state.imageScale = Number(button.dataset.scale);
+  }));
+
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      if (window.ort) { resolve(); return; }
+      const script = document.createElement('script'); script.src = src; script.async = true;
+      script.onload = () => window.ort ? resolve() : reject(new Error('El runtime ONNX se descargó, pero no se inició.'));
+      script.onerror = () => reject(new Error('No se pudo descargar ONNX Runtime. Revisá internet e intentá otra vez.'));
+      document.head.appendChild(script);
+    });
+  }
+  async function downloadModel() {
+    if (state.modelBuffer) return state.modelBuffer;
+    progress(3, 'Descargando modelo IA · aprox. 64 MB…');
+    const response = await fetch(MODEL_URL, { mode: 'cors', cache: 'force-cache' });
+    if (!response.ok) throw new Error(`No se pudo descargar el modelo (HTTP ${response.status}).`);
+    // Read once into a single ArrayBuffer. Chunk accumulation duplicates 64 MB in RAM
+    // and was a major source of tab crashes on lower-memory Android phones.
+    state.modelBuffer = await response.arrayBuffer();
+    if (state.modelBuffer.byteLength < 10_000_000) {
+      state.modelBuffer = null;
+      throw new Error('La descarga del modelo quedó incompleta. Revisá tu conexión e intentá otra vez.');
+    }
+    progress(31, 'Modelo descargado. Iniciando el motor neuronal…');
+    return state.modelBuffer;
+  }
+  async function getImageSession() {
+    if (state.imageSession) return state.imageSession;
+    progress(1, 'Preparando motor de IA…');
+    await loadScript(ORT_SCRIPT);
+    const ort = window.ort;
+    ort.env.logLevel = 'error'; ort.env.wasm.wasmPaths = ORT_WASM; ort.env.wasm.numThreads = 1;
+    const model = await downloadModel();
+    if (navigator.gpu) {
+      try {
+        progress(32, 'Probando aceleración gráfica…');
+        state.imageSession = await ort.InferenceSession.create(model, { executionProviders: ['webgpu'], graphOptimizationLevel: 'all' });
+        state.backend = 'GPU / WebGPU'; state.modelBuffer = null; return state.imageSession;
+      } catch (gpuError) { console.warn('WebGPU no disponible; se usará CPU / WASM.', gpuError); }
+    }
+    progress(34, 'Preparando motor CPU…');
+    state.imageSession = await ort.InferenceSession.create(model, { executionProviders: ['wasm'], graphOptimizationLevel: 'all' });
+    state.backend = 'CPU / WASM'; state.modelBuffer = null; return state.imageSession;
+  }
+  function makeTensor(imageData) {
+    const { width, height, data } = imageData, plane = width * height;
+    const chw = new Float32Array(plane * 3);
+    for (let i = 0; i < plane; i++) { const j = i * 4; chw[i] = data[j] / 255; chw[plane + i] = data[j + 1] / 255; chw[plane * 2 + i] = data[j + 2] / 255; }
+    return new window.ort.Tensor('float32', chw, [1, 3, height, width]);
+  }
+  async function runTiledSR(sourceCanvas, scale) {
+    const session = await getImageSession();
+    const sourceCtx = sourceCanvas.getContext('2d', { willReadFrequently: true });
+    const sw = sourceCanvas.width, sh = sourceCanvas.height;
+    const full = document.createElement('canvas'); full.width = sw * 4; full.height = sh * 4;
+    if (full.width * full.height > 4_000_000) throw new Error('El resultado sería demasiado grande para este celular. Probá una imagen más pequeña.');
+    const outputCtx = full.getContext('2d');
+    const inputName = session.inputNames[0], outputName = session.outputNames[0];
+    const cols = Math.ceil(sw / TILE), rows = Math.ceil(sh / TILE), total = cols * rows; let done = 0;
+    for (let y = 0; y < sh; y += TILE) {
+      for (let x = 0; x < sw; x += TILE) {
+        const coreW = Math.min(TILE, sw - x), coreH = Math.min(TILE, sh - y);
+        const sx = Math.max(0, x - MARGIN), sy = Math.max(0, y - MARGIN);
+        const ex = Math.min(sw, x + coreW + MARGIN), ey = Math.min(sh, y + coreH + MARGIN);
+        const tileData = sourceCtx.getImageData(sx, sy, ex - sx, ey - sy);
+        const result = await session.run({ [inputName]: makeTensor(tileData) });
+        const output = result[outputName] || result[Object.keys(result)[0]];
+        if (!output || !output.dims || output.dims.length !== 4) throw new Error('El modelo devolvió un resultado inesperado.');
+        const oh = output.dims[2], ow = output.dims[3], plane = oh * ow, values = output.data;
+        const cropX = (x - sx) * 4, cropY = (y - sy) * 4;
+        const imageData = outputCtx.createImageData(coreW * 4, coreH * 4); let k = 0;
+        for (let py = 0; py < coreH * 4; py++) {
+          const row = (cropY + py) * ow + cropX;
+          for (let px = 0; px < coreW * 4; px++) {
+            const idx = row + px;
+            imageData.data[k++] = Math.max(0, Math.min(255, Math.round(values[idx] * 255)));
+            imageData.data[k++] = Math.max(0, Math.min(255, Math.round(values[plane + idx] * 255)));
+            imageData.data[k++] = Math.max(0, Math.min(255, Math.round(values[2 * plane + idx] * 255)));
+            imageData.data[k++] = 255;
+          }
+        }
+        outputCtx.putImageData(imageData, x * 4, y * 4); done++;
+        progress(38 + done / total * 58, `Reconstruyendo detalles · ${done} de ${total}`);
+        await new Promise(resolve => setTimeout(resolve, 0));
+      }
+    }
+    if (scale === 2) {
+      const half = document.createElement('canvas'); half.width = sw * 2; half.height = sh * 2;
+      const hctx = half.getContext('2d'); hctx.imageSmoothingEnabled = true; hctx.imageSmoothingQuality = 'high'; hctx.drawImage(full, 0, 0, half.width, half.height); full.width = 1; full.height = 1;
+      return half;
+    }
+    return full;
+  }
+  $('enhanceImage').addEventListener('click', async () => {
+    if (!state.previewImage || state.exporting) return;
+    $('enhanceImage').disabled = true; $('quickImage').disabled = true; $('downloadImage').classList.add('hidden'); $('resultInfo').style.display = 'none'; state.exporting = true;
+    try {
+      const img = state.previewImage;
+      if (!img.complete || !img.naturalWidth) throw new Error('La imagen todavía no terminó de cargar. Volvé a seleccionarla.');
+      const ratio = Math.min(1, MAX_IMAGE_SIDE / Math.max(img.naturalWidth, img.naturalHeight), Math.sqrt(MAX_IMAGE_PIXELS / (img.naturalWidth * img.naturalHeight)));
+      const width = Math.max(1, Math.round(img.naturalWidth * ratio)), height = Math.max(1, Math.round(img.naturalHeight * ratio));
+      const input = document.createElement('canvas'); input.width = width; input.height = height;
+      const inputCtx = input.getContext('2d', { willReadFrequently: true }); inputCtx.imageSmoothingEnabled = true; inputCtx.imageSmoothingQuality = 'high'; inputCtx.drawImage(img, 0, 0, width, height);
+      const output = await runTiledSR(input, state.imageScale);
+      const blob = await new Promise(resolve => output.toBlob(resolve, 'image/png'));
+      if (!blob) throw new Error('Chrome no pudo crear el PNG final.');
+      revokeURL('resultURL'); state.resultURL = URL.createObjectURL(blob); $('afterImage').src = state.resultURL;
+      await $('afterImage').decode();
+      const link = $('downloadImage'); link.href = state.resultURL; link.download = safeName(state.file.name, 'nexo-mejorada', 'png'); link.classList.remove('hidden');
+      const resized = ratio < .999 ? ` La entrada se adaptó a ${width} × ${height} px para cuidar la memoria.` : '';
+      showInfo(`Imagen mejorada con Real-ESRGAN · ${output.width} × ${output.height} px · ${state.imageScale}× · ${state.backend}.${resized}`);
+      $('previewNote').textContent = 'Reconstrucción neuronal lista. Deslizá la línea para comparar.'; progress(100, 'Mejora terminada'); $('topStatus').textContent = 'IA COMPLETADA'; toast('¡Imagen mejorada! Tocá Descargar para guardarla.');
+      output.width = 1; output.height = 1;
+    } catch (error) {
+      console.error('NEXO image enhancement:', error); hideProgress();
+      let message = error && error.message ? error.message : 'Error desconocido.';
+      if (/memory|allocation|out of memory/i.test(message)) message = 'El celular se quedó sin memoria para esta imagen. Probá una imagen más pequeña.';
+      showInfo('No se pudo completar la mejora IA. ' + message, true); toast('Falló el procesamiento IA.');
+    } finally { state.exporting = false; $('enhanceImage').disabled = false; $('quickImage').disabled = false; }
+  });
+  $('quickImage').addEventListener('click', async () => {
+    const img = state.previewImage; if (!img || !img.naturalWidth || state.exporting) return;
+    state.exporting = true; $('quickImage').disabled = true; $('enhanceImage').disabled = true; $('downloadImage').classList.add('hidden'); progress(5, 'Aplicando mejora rápida…');
+    try {
+      const ratio = Math.min(2, 2400 / Math.max(img.naturalWidth, img.naturalHeight), Math.sqrt(4_000_000 / (img.naturalWidth * img.naturalHeight)));
+      const w = Math.max(1, Math.round(img.naturalWidth * ratio)), h = Math.max(1, Math.round(img.naturalHeight * ratio));
+      const output = document.createElement('canvas'); output.width = w; output.height = h;
+      const c = output.getContext('2d', { willReadFrequently: true }); c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high'; c.filter = 'contrast(1.05) saturate(1.04)'; c.drawImage(img, 0, 0, w, h); c.filter = 'none';
+      const blob = await new Promise(resolve => output.toBlob(resolve, 'image/png')); if (!blob) throw new Error('No se pudo crear el archivo.');
+      revokeURL('resultURL'); state.resultURL = URL.createObjectURL(blob); $('afterImage').src = state.resultURL; await $('afterImage').decode();
+      const link = $('downloadImage'); link.href = state.resultURL; link.download = safeName(state.file.name, 'mejora-rapida', 'png'); link.classList.remove('hidden');
+      showInfo(`Mejora rápida lista · ${w} × ${h} px. Este modo no utiliza IA neuronal.`); progress(100, 'Mejora terminada'); toast('Resultado listo para descargar.'); output.width = 1; output.height = 1;
+    } catch (error) { showInfo(error.message || 'No se pudo mejorar la imagen.', true); hideProgress(); }
+    finally { state.exporting = false; $('quickImage').disabled = false; $('enhanceImage').disabled = false; }
+  });
+
+  function resizeVideoCanvas() {
+    const vw = video.videoWidth, vh = video.videoHeight; if (!vw || !vh) return;
+    const ratio = Math.min(1, Math.sqrt(MAX_VIDEO_PIXELS / (vw * vh)));
+    canvas.width = Math.max(2, Math.round(vw * ratio)); canvas.height = Math.max(2, Math.round(vh * ratio));
+  }
+  function currentVideoFilter() {
+    return `brightness(${$('videoBrightness').value}%) contrast(${$('videoContrast').value}%) saturate(${$('videoSaturation').value}%)`;
+  }
+  function drawVideoFrame() {
+    if (video.readyState < 2 || !video.videoWidth || !ctx) return;
+    ctx.save(); ctx.filter = currentVideoFilter(); ctx.drawImage(video, 0, 0, canvas.width, canvas.height); ctx.restore();
+  }
+  function videoLoop() {
+    if (video.paused || video.ended) return;
+    drawVideoFrame(); $('videoSeek').value = video.currentTime; $('videoTime').textContent = `${fmtTime(video.currentTime)} / ${fmtTime(state.videoDuration)}`;
+    if (state.exporting) progress(video.currentTime / state.videoDuration * 100, 'Procesando video en tiempo real…');
+    state.raf = requestAnimationFrame(videoLoop);
+  }
+  $('playButton').addEventListener('click', async () => {
+    if (video.paused) { try { await video.play(); $('playButton').textContent = 'Ⅱ'; } catch (_) { toast('Chrome no pudo reproducir este video.'); } }
+    else { video.pause(); $('playButton').textContent = '▶'; }
+  });
+  video.addEventListener('play', () => { cancelAnimationFrame(state.raf); $('playButton').textContent = 'Ⅱ'; videoLoop(); });
+  video.addEventListener('pause', () => { cancelAnimationFrame(state.raf); $('playButton').textContent = '▶'; drawVideoFrame(); });
+  video.addEventListener('seeked', drawVideoFrame);
+  video.addEventListener('timeupdate', () => {
+    if (!state.exporting && state.videoDuration) { $('videoSeek').value = video.currentTime; $('videoTime').textContent = `${fmtTime(video.currentTime)} / ${fmtTime(state.videoDuration)}`; }
+  });
+  $('videoSeek').addEventListener('input', () => { if (!state.exporting && Number.isFinite(video.duration)) video.currentTime = Number($('videoSeek').value); });
+
+  function updateVideoSliders() {
+    [['videoContrast','videoContrastValue'],['videoSaturation','videoSaturationValue'],['videoBrightness','videoBrightnessValue']].forEach(([input, output]) => $(output).textContent = $(input).value + '%');
+    drawVideoFrame();
+  }
+  ['videoContrast','videoSaturation','videoBrightness'].forEach(id => $(id).addEventListener('input', updateVideoSliders));
+  $('videoPreset').querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+    $('videoPreset').querySelectorAll('button').forEach(item => item.classList.toggle('active', item === button));
+    const gaming = button.dataset.preset === 'gaming';
+    $('videoContrast').value = gaming ? 118 : 108; $('videoSaturation').value = gaming ? 118 : 108; $('videoBrightness').value = gaming ? 102 : 100; updateVideoSliders();
+  }));
+  function supportedRecorderMime() {
+    if (!window.MediaRecorder) return '';
+    const types = ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4'];
+    return types.find(type => MediaRecorder.isTypeSupported(type)) || '';
+  }
+  async function waitForSeek(time) {
+    if (video.readyState < 2) {
+      await new Promise((resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error('El video tardó demasiado en cargar el primer fotograma.')), 15000);
+        video.addEventListener('loadeddata', () => { clearTimeout(timer); resolve(); }, { once: true });
+        video.addEventListener('error', () => { clearTimeout(timer); reject(new Error('No se pudo leer el video.')); }, { once: true });
+      });
+    }
+    if (Math.abs(video.currentTime - time) < .05) return;
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('El video tardó demasiado en posicionarse.')), 10000);
+      video.addEventListener('seeked', () => { clearTimeout(timer); resolve(); }, { once: true });
+      video.addEventListener('error', () => { clearTimeout(timer); reject(new Error('No se pudo leer el video.')); }, { once: true });
+      video.currentTime = time;
+    });
+  }
+  $('exportVideo').addEventListener('click', async () => {
+    if (!state.file || state.exporting || !state.videoDuration) return;
+    if (!canvas.captureStream || !window.MediaRecorder) { toast('Este Chrome no ofrece exportación de video. Actualizá Chrome e intentá otra vez.'); return; }
+    const mime = supportedRecorderMime(); if (!mime) { toast('Tu navegador no admite un formato de video compatible.'); return; }
+    state.exporting = true; state.chunks = []; $('exportVideo').disabled = true; $('playButton').disabled = true; $('videoSeek').disabled = true; $('downloadVideo').classList.add('hidden'); progress(0, 'Preparando exportación…');
+    let canvasStream = null, sourceStream = null, recorder = null, finished = false, stopRecorderAtEnd = null;
+    try {
+      revokeURL('videoURL'); $('downloadVideo').classList.add('hidden');
+      video.pause(); await waitForSeek(0); drawVideoFrame();
+      canvasStream = canvas.captureStream(30);
+      try { if (typeof video.captureStream === 'function') sourceStream = video.captureStream(); else if (typeof video.mozCaptureStream === 'function') sourceStream = video.mozCaptureStream(); } catch (audioError) { console.warn('No se pudo capturar audio', audioError); }
+      if (sourceStream) sourceStream.getAudioTracks().forEach(track => canvasStream.addTrack(track));
+      recorder = new MediaRecorder(canvasStream, { mimeType: mime, videoBitsPerSecond: 4500000 }); state.recorder = recorder;
+      const resultPromise = new Promise((resolve, reject) => {
+        recorder.addEventListener('dataavailable', event => { if (event.data && event.data.size) state.chunks.push(event.data); });
+        recorder.addEventListener('error', () => reject(new Error('Chrome interrumpió la grabación del resultado.')), { once: true });
+        recorder.addEventListener('stop', () => {
+          if (finished) return; finished = true;
+          const blob = new Blob(state.chunks, { type: mime });
+          if (!blob.size) reject(new Error('El archivo exportado quedó vacío.')); else resolve(blob);
+        }, { once: true });
+      });
+      recorder.start(1000);
+      stopRecorderAtEnd = () => { if (recorder.state === 'recording') recorder.stop(); };
+      video.addEventListener('ended', stopRecorderAtEnd);
+      await video.play(); $('playButton').textContent = 'Ⅱ'; // the play event starts the preview/export frame loop
+      const blob = await resultPromise;
+      revokeURL('videoURL'); state.videoURL = URL.createObjectURL(blob);
+      const ext = mime.includes('mp4') ? 'mp4' : 'webm'; const link = $('downloadVideo');
+      link.href = state.videoURL; link.download = safeName(state.file.name, 'nexo-mejorado', ext); link.classList.remove('hidden');
+      const audioText = sourceStream && sourceStream.getAudioTracks().length ? 'audio capturado' : 'sin audio (Chrome no permitió capturarlo)';
+      showInfo(`Video exportado · ${canvas.width} × ${canvas.height} px · ${ext.toUpperCase()} · ${fmtBytes(blob.size)} · ${audioText}.`);
+      progress(100, 'Exportación terminada'); $('topStatus').textContent = 'VIDEO LISTO'; toast('Video listo. Tocá Descargar video mejorado.');
+    } catch (error) {
+      console.error('NEXO video export:', error);
+      try { if (recorder && recorder.state === 'recording') recorder.stop(); } catch (_) {}
+      hideProgress(); showInfo(error.message || 'No se pudo exportar el video.', true); toast('No se pudo exportar el video.');
+    } finally {
+      state.exporting = false; $('exportVideo').disabled = false; $('playButton').disabled = false; $('videoSeek').disabled = false;
+      if (canvasStream) canvasStream.getTracks().forEach(track => track.stop());
+      if (sourceStream) sourceStream.getTracks().forEach(track => track.stop());
+      if (stopRecorderAtEnd) video.removeEventListener('ended', stopRecorderAtEnd);
+      state.recorder = null; state.videoStream = null;
+      if (!video.paused) video.pause(); $('playButton').textContent = '▶';
+    }
+  });
+
+  // Keep downloads as visible native links: Chrome Android handles these more reliably than synthetic clicks.
+  $('downloadImage').addEventListener('click', event => {
+    if (!state.resultURL) { event.preventDefault(); toast('Primero mejorá una imagen.'); }
+  });
+  $('downloadVideo').addEventListener('click', event => {
+    if (!state.videoURL) { event.preventDefault(); toast('Primero exportá un video.'); }
+  });
+  window.addEventListener('beforeunload', () => {
+    ['originalURL','resultURL','videoURL'].forEach(revokeURL);
+    if (state.videoStream) state.videoStream.getTracks().forEach(track => track.stop());
+  });
+  updateVideoSliders();
+})();
+</script>
+</body>
+</html>
